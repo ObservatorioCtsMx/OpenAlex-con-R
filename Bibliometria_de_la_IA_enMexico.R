@@ -12,6 +12,7 @@
 # QUERY6= "neural network", "evolutionary computing", "evolutive algorithms"
 # QUERY7= "robotics, robots"
 # QUERY8= "artificial intelligence"
+###Las bases de datos  se encuentran disponibles en https://zenodo.org/records/10642462####################
 #Las claves se aplicaron a títulos, resúmenes y conceptos
 library(openalexR)
 library(tidyr)

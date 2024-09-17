@@ -3,7 +3,8 @@
 # Se reviso el codigo ejemplo de GabrielaSued para la consulta de datos en OpenAlexR:
 #  corrigiendo errores al desanidar columnas con listas en ellas
 #  se modifico dicho codico para que la consulta de datos fuera sobre conceptos relacionados a nano 
-#  se agrego una extensa lista de comentarios para una mayor comprension del codigo 
+#  se agrego una extensa lista de comentarios para una mayor comprension del codigo
+# Trabajo realizado en el marco del proyecto PAPIIT IN302623 "Indicadores sobre la ciencia y la tecnolog铆a en el contexto de la Ciencia Abierta"
 
 
 #0. :::::::::::::::::::::::::::::::::::::Instalacion y ejecucion de Paqueterias::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -33,12 +34,12 @@ paises <- "mx"
 #paises <- c("mx","AG","AR","BS","BB","BZ","BR","CL","CO","CR","CU","DO","EC","SV","BO","GD","GT","GY","HT","HN","JM","MX","NI","PA","PY","PE","VE","DO","KN","VC","LC","SR","TT","UY")
 
 
-#oa_fetches una funci髇 compuesta que se utiliza para construir consultas, realizar solicitudes y convertir los resultados en un data frame.
-#Esta funci髇 se utiliza para interactuar con la API de OpenAlex y recuperar datos acad閙icos y de investigaci髇.
+#oa_fetches una funci贸n compuesta que se utiliza para construir consultas, realizar solicitudes y convertir los resultados en un data frame.
+#Esta funci贸n se utiliza para interactuar con la API de OpenAlex y recuperar datos acad茅micos y de investigaci贸n.
 
 query <- oa_fetch(
-  #entity(Car醕ter): Indica la entidad acad閙ica o de investigaci髇 de la b鷖queda.
-  #                  Puede ser uno de los siguientes: "works" (trabajos), "authors" (autores), "lugares" (lugares de publicaci髇), "institutions" (instituciones) o "concepts" (conceptos).
+  #entity(Car谩cter): Indica la entidad acad茅mica o de investigaci贸n de la b煤squeda.
+  #                  Puede ser uno de los siguientes: "works" (trabajos), "authors" (autores), "lugares" (lugares de publicaci贸n), "institutions" (instituciones) o "concepts" (conceptos).
   entity = "works",
   
   #Se comentan las siguientes dos lines para no tener limites en la fecha de publicacion
@@ -48,11 +49,11 @@ query <- oa_fetch(
   institutions.country_code = paises,       #cambiar la variable paises para tener todo America latina o solo Mexico
   concepts.id               = conceptos,    #cambiar la variable conceptos para tener solo 5 o todos los conceptos registrados
  
-  #options(Lista): Par醡etros adicionales que se pueden agregar a la consulta, como select, sort, sample, y seed.
-  #                Estos par醡etros permiten personalizar la consulta y los resultados.
-  options = list(sort = "from_publication_date:desc"),  #Se especifica una opci髇 adicional para ordenar los resultados en orden descendente (desc) seg鷑 la fecha de publicaci髇, de manera que los trabajos m醩 recientes aparezcan primero
+  #options(Lista): Par谩metros adicionales que se pueden agregar a la consulta, como select, sort, sample, y seed.
+  #                Estos par谩metros permiten personalizar la consulta y los resultados.
+  options = list(sort = "from_publication_date:desc"),  #Se especifica una opci贸n adicional para ordenar los resultados en orden descendente (desc) seg煤n la fecha de publicaci贸n, de manera que los trabajos m谩s recientes aparezcan primero
   
-  #verbose(L骻ico): Si es VERDADERO, imprime informaci髇 sobre el proceso de consulta.
+  #verbose(L贸gico): Si es VERDADERO, imprime informaci贸n sobre el proceso de consulta.
   verbose = TRUE)
 
 
@@ -149,7 +150,7 @@ query_bibliometrix<-query_bibliometrix%>%
 query_bibliometrix<-query_bibliometrix%>%
   unnest_wider(related_works, names_sep = "_")
 
-query_bibliometrix<-query_bibliometrix%>%                          # agregamos el argumento "names_repairde" para especificar una estrategia de reparaci髇 de nombres ya que en caso contrario marcara error porque generara columnas con nombres duplicados
+query_bibliometrix<-query_bibliometrix%>%                          # agregamos el argumento "names_repairde" para especificar una estrategia de reparaci贸n de nombres ya que en caso contrario marcara error porque generara columnas con nombres duplicados
   unnest_wider(grants, names_sep = "_", names_repair = "unique")   # "unique" renombrara las columnas duplicadas agregando sufijos numericos para hacer nombres unicos
 
 
